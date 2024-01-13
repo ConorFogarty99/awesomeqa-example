@@ -58,5 +58,12 @@ class TicketRepository:
         self.tickets = [ticket for ticket in self.tickets if ticket['id'] != ticket_id]
         return len(self.tickets) < original_count
 
+    def close_ticket(self, ticket_id: str) -> bool:
+        ticket = next((t for t in self.tickets if t["id"] == ticket_id), None)
+        if ticket:
+            ticket['status'] = 'closed'
+            return True
+        return False
+
     def get_message(self, msg_id: str) -> dict:
         return self.messages.get(msg_id)

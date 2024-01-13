@@ -20,7 +20,7 @@ const truncateMessage = (message, limit = 20) => {
     return message;
 };
 
-const TicketModal = ({ open, onClose, ticket, contextMessages, onRemoveTicket, onConfirmRemoveTicket, getStatusStyles }) => {
+const TicketModal = ({ open, onClose, ticket, contextMessages, onRemoveTicket, onConfirmRemoveTicket, getStatusStyles, onCloseTicket  }) => {
     if (!ticket || !ticket.message || !ticket.message.author) return null;
   
     const originalMessageId = ticket.msg_id;
@@ -76,6 +76,15 @@ const TicketModal = ({ open, onClose, ticket, contextMessages, onRemoveTicket, o
                     >
                         View in Discord
                     </Button>
+                    {ticket.status !== 'closed' && (
+                        <Button
+                        variant="contained"
+                        onClick={() => onCloseTicket(ticket.id)}
+                        sx={{ mt: 2 }}
+                        >
+                            Close Ticket
+                        </Button>
+                    )}
                     <Button
                         variant="contained"
                         startIcon={<DeleteIcon />}
@@ -269,6 +278,24 @@ const TicketsPage = () => {
             console.error('Error deleting ticket:', error);
         }
     };
+
+    const handleCloseTicket = async (ticketId) => {
+        try {
+          const response = await fetch(`http://localhost:5001/tickets/${ticketId}/close`, {
+            method: 'PUT',
+          });
+    
+          if (!response.ok) {
+            throw new Error('Failed to close the ticket');
+          }
+    
+          await fetchTickets();
+          setOpenModal(false);
+        } catch (error) {
+          setError(error.message);
+          console.error('Error closing ticket:', error);
+        }
+      };
 
     const handleConfirmDelete = (ticketId) => {
         setTicketToDelete(ticketId);
@@ -530,6 +557,7 @@ const TicketsPage = () => {
                 onRemoveTicket={handleRemoveTicket}
                 onConfirmRemoveTicket={handleConfirmDelete}
                 getStatusStyles={getStatusStyles}
+                onCloseTicket={handleCloseTicket}
             />
 
             {/* Confirmation Dialog for Deleting a Ticket */}

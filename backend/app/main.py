@@ -61,6 +61,18 @@ async def delete_ticket(ticket_id: str, ticket_repository: TicketRepository = De
         raise HTTPException(status_code=404, detail="Ticket not found")
     return {"message": "Ticket deleted"}
 
+@app.put("/tickets/{ticket_id}/close")
+async def close_ticket(ticket_id: str, ticket_repository: TicketRepository = Depends(get_ticket_repository)):
+    ticket = ticket_repository.get_ticket_with_message(ticket_id)
+    if not ticket:
+        raise HTTPException(status_code=404, detail="Ticket not found")
+
+    ticket_updated = ticket_repository.close_ticket(ticket_id)
+    if not ticket_updated:
+        raise HTTPException(status_code=500, detail="Failed to close ticket")
+
+    return {"message": "Ticket closed"}
+
 @app.get("/messages/{msg_id}")
 async def get_message(msg_id: str, ticket_repository: TicketRepository = Depends(get_ticket_repository)):
     message = ticket_repository.get_message(msg_id)
