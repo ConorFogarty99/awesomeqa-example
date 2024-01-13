@@ -49,7 +49,7 @@ Steps to setup the backend environment:
 **Response:** A JSON object with the ticket's details if found, otherwise a 404 error.
 
 #### `DELETE /tickets/{ticket_id}`
-**Description:** Removes a ticket from the list of tickets. This action is non-reversible and is used to clean up tickets that are not needed anymore.  
+**Description:** Removes a ticket from the list of tickets.
 
 **Path Parameters:**
 - `ticket_id`: The unique identifier of the ticket to be deleted.
@@ -57,7 +57,7 @@ Steps to setup the backend environment:
 **Response:** A success message if the ticket is deleted, otherwise a 404 error if the ticket is not found.
 
 #### `PUT /tickets/{ticket_id}/close`
-**Description:** Updates the status of a ticket to "closed". This is used when a moderator resolves a ticket.  
+**Description:** Updates the status of a ticket to "closed".
 
 **Path Parameters:**
 - `ticket_id`: The unique identifier of the ticket to be updated.
@@ -65,7 +65,7 @@ Steps to setup the backend environment:
 **Response:** A success message if the ticket's status is updated, otherwise an error message if the operation fails.
 
 #### `GET /messages/{msg_id}`
-**Description:** Retrieves a specific message using its ID. This can be useful to fetch the content and details of a message associated with a ticket. 
+**Description:** Retrieves a specific message using its ID.
 
 **Path Parameters:**
 - `msg_id`: The unique identifier of the message to retrieve.
@@ -73,6 +73,23 @@ Steps to setup the backend environment:
 **Response:** A JSON object containing the message details if found, otherwise a 404 error.
 
 ## Testing
+
+#  Continuous Integration with GitHub Actions
+
+GitHub Actions is used automate testing for both the backend and frontend components upon every commit and pull request, ensuring that all changes are verified before integration.
+Backend tests are conducted using Pytest to simulate API behavior and validate the responses against expected outcomes with a suite of unit and integration tests.
+
+#  Backend Testing
+
+Mock data is employed to create a controlled testing environment (and not to upload the real data to github :) ), allowing us to verify the functionality of all REST API endpoints under various scenarios.
+Tests cover a range of cases, including successful data retrieval, error handling, and state changes caused by actions like ticket deletion and status updates.
+
+#  Frontend Testing
+
+Frontend testing is performed to ensure that the user interface behaves as expected, including rendering components and user interactions.
+Automated tests check the integration of the frontend with the backend services, ensuring that the UI correctly displays data from the API and sends requests based on user actions.
+
+# API Testing
 
 ## User Interface
 ### Home Page
