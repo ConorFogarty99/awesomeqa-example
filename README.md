@@ -79,6 +79,8 @@ Steps to setup the backend environment:
 -  Ticket Modal showing context messages. Highlighting ticket question for moderator ease.
 -  Open/Close ticket status.
 -  Extensive testing.
+    -  Frontend Testing.
+    -  Backend Testing.
     -  GitHub Actions integration.
   
 ## Testing
