@@ -78,8 +78,8 @@ Steps to setup the backend environment:
 -  Search and filter functionality for moderator convenience.
 -  Ticket Modal showing context messages. Highlighting ticket question for moderator ease.
 -  Open/Close ticket status.
--  Extensive testing
--  -  GitHub Actions integration
+-  Extensive testing.
+    -  GitHub Actions integration.
   
 ## Testing
 
