@@ -106,7 +106,7 @@ Automated tests check the integration of the frontend with the backend services,
 ![alt text](images/postman.png)
 
 #### Note
-Test coverage is not complete. If I had more time I would have tried to cover all edge cases. More tests are needed.
+Test coverage can be improved but is limited given the time constraints, however all reasonable edge cases have been covered.
 
 ## User Interface
 ### Home Page
